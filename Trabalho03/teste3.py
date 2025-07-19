@@ -1,0 +1,3 @@
+teste = "abvcsadasdas"
+
+print(teste)
