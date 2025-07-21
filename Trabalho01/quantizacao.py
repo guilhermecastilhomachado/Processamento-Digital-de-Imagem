@@ -1,14 +1,9 @@
 import cv2
 import numpy as np
 import matplotlib.pyplot as plt
-import os
 
 # Carrega a imagem em escala de cinza
 imagem = cv2.imread('ctskull-256.tif', cv2.IMREAD_GRAYSCALE)
-
-# Cria uma pasta para salvar as imagens quantizadas (caso queira salvar)
-os.makedirs("quantizadas", exist_ok=True)
-
 
 # Função para quantizar a imagem para n bits
 def quantizar_imagem(imagem, bits):
