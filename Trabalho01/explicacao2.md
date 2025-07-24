@@ -16,9 +16,15 @@ import cv2
 import numpy as np
 import matplotlib.pyplot as plt
 ```
-cv2: usado para carregar e salvar imagens.
-numpy: usado para manipulação de arrays e operações matemáticas.
-matplotlib.pyplot: usado para exibir imagens.
+cv2: É a biblioteca OpenCV (Open Source Computer Vision).
+Ela é usada para ler, manipular e salvar imagens.
+Aqui, ela serve para abrir a imagem original e salvar as imagens modificadas.
+
+numpy (np): Biblioteca para operações matemáticas e com arrays.
+Muito usada para fazer cálculos nos pixels das imagens.
+
+matplotlib.pyplot (plt): Biblioteca para exibir imagens em gráficos.
+Usamos para mostrar as imagens quantizadas lado a lado.
 
 ---
 ### 2. **Carregamento da Imagem**
