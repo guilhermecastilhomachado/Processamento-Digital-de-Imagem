@@ -8,15 +8,19 @@ import matplotlib.pyplot as plt
 # utilizando de 7 a 1 bit(s) por pixel.
 
 # Carrega a imagem em escala de cinza
-imagem = cv2.imread('ctskull-256.tif', cv2.IMREAD_GRAYSCALE)
+imagem = cv2.imread('ctskull-256.tif', cv2.IMREAD_GRAYSCALE) # cv2.imread carrega a imagem do arquivo especificado
+# cv2.IMREAD_GRAYSCALE garante que a imagem seja carregada em escala de cinza
 
 # Função para quantizar a imagem para n bits
 def quantizar_imagem(imagem, bits):
     # Calcula o número de níveis possíveis (2^bits)
-    niveis = 2 ** bits
+    niveis = 2 ** bits # Calcula o número de níveis de cinza com base no número de bits
 
     # Normaliza os valores para os níveis desejados
     imagem_quantizada = np.floor(imagem / (256 / niveis)) * (255 / (niveis - 1))
+    # A normalização é feita dividindo os valores da imagem pelo número de níveis possíveis
+    # e multiplicando pelo valor máximo de intensidade (255) dividido pelo número de níveis menos 1.
+    # np.floor arredonda para baixo os valores resultantes, garantindo que os valores quantizados sejam inteiros
 
     # Converte para uint8
     return imagem_quantizada.astype(np.uint8) # Converte a imagem quantizada para o tipo uint8
