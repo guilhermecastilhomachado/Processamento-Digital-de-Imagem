@@ -50,7 +50,8 @@ def processar_imagem_relogio():
    
     NOME_ARQUIVO = 'relogio.tif'
 
-    diretorio_completo = f"{PASTA}/{NOME_ARQUIVO}"
+    diretorio_completo = 'relogio.tif' #f"{PASTA}/{NOME_ARQUIVO}"
+
 
     # Verifica se o arquivo de imagem existe
     if not os.path.exists(diretorio_completo):

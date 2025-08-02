@@ -15,6 +15,7 @@ imagem = cv2.imread('ctskull-256.tif', cv2.IMREAD_GRAYSCALE) # cv2.imread carreg
 def quantizar_imagem(imagem, bits):
     # Calcula o número de níveis possíveis (2^bits)
     niveis = 2 ** bits # Calcula o número de níveis de cinza com base no número de bits
+    # neste caso a imagem tem 8 bits para cada pixel, então os níveis vão de 0 a 255
 
     # Normaliza os valores para os níveis desejados
     imagem_quantizada = np.floor(imagem / (256 / niveis)) * (255 / (niveis - 1))
