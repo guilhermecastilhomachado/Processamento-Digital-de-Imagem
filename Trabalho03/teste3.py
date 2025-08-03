@@ -1,3 +1,0 @@
-teste = "abvcsadasdas"
-
-print(teste)
