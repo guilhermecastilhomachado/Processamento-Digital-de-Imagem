@@ -1,3 +1,4 @@
+import os
 import numpy as np
 from PIL import Image
 import matplotlib.pyplot as plt
@@ -23,7 +24,7 @@ def aplicar_mapeamento(imagem_array, mapeamento):
 # Execução principal
 if __name__ == "__main__":
     # 1. Carrega imagem em tons de cinza
-    imagem = Image.open('imagem_exemplo2.png').convert('L')  # converte para escala de cinza
+    imagem = Image.open('imagem_exemplo3.png').convert('L')  # converte para escala de cinza
     imagem_array = np.array(imagem)
 
     # 2. Define número de níveis de cinza (L = 256 para 8 bits)
@@ -59,7 +60,12 @@ if __name__ == "__main__":
     plt.show()
 
     # 5. Salvar a imagem equalizada
-    imagem_equalizada.save('imagem_equalizada2.png')
+    nome_arquivo = 'imagem_equalizada3.png'
+    if os.path.exists(nome_arquivo):
+        print(f"A imagem '{nome_arquivo}' já existe. Nenhuma nova imagem foi salva.")
+    else:
+        imagem_equalizada.save(nome_arquivo)
+        print(f"A imagem equalizada foi salva como '{nome_arquivo}'.")
 
     # 6. Mostrar o mapeamento (para explicação)
     print("\nMapeamento de intensidades (original → equalizado):")
