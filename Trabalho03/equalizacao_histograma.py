@@ -25,7 +25,7 @@ def aplicar_mapeamento(imagem_array, mapeamento):
 # Execução principal
 if __name__ == "__main__":
     # 1. Carrega imagem em tons de cinza
-    imagem = Image.open('imagem_exemplo3.png').convert('L')  # converte para escala de cinza
+    imagem = Image.open('imagem_exemplo6.png').convert('L')  # converte para escala de cinza
     imagem_array = np.array(imagem) # Converte a imagem para um array NumPy
 
     # 2. Define número de níveis de cinza (L = 256 para 8 bits)
@@ -61,7 +61,7 @@ if __name__ == "__main__":
     plt.show()
 
     # 5. Salvar a imagem equalizada
-    nome_arquivo = 'imagem_equalizada3.png'
+    nome_arquivo = 'imagem_equalizada6.png'
     if os.path.exists(nome_arquivo):
         print(f"A imagem '{nome_arquivo}' já existe. Nenhuma nova imagem foi salva.")
     else:
