@@ -2,120 +2,110 @@ import numpy as np
 from PIL import Image
 import matplotlib.pyplot as plt
 
-# --------------------------------------------------------------------------
-# FUNÇÃO PRINCIPAL DO EXERCÍCIO
-# --------------------------------------------------------------------------
 def equalizar_histograma(imagem_np, L=256):
-    """
-    Calcula o mapeamento de equalização de histograma para uma imagem.
-    """
-    # Validação para garantir que a imagem está em tons de cinza
+    """Calcula o mapeamento de equalização de histograma para uma imagem."""
     if imagem_np.ndim != 2:
         raise ValueError("A imagem de entrada deve estar em tons de cinza (array 2D).")
-
-    # Passo 1: Calcular a frequência de cada intensidade (nk)
-    # np.histogram é eficiente, mas vamos fazer manualmente para seguir o espírito.
     nk = [0] * L
     for pixel_value in np.nditer(imagem_np):
         nk[int(pixel_value)] += 1
-
-    # Obter o número total de pixels
     total_pixels = imagem_np.size
-
-    # Passo 2: Calcular a probabilidade de cada intensidade (Pr(rk))
     pr_rk = [freq / total_pixels for freq in nk]
-
-    # Passo 3: Calcular a Função de Distribuição Cumulativa (CDF)
     cdf = [0.0] * L
     cdf[0] = pr_rk[0]
     for i in range(1, L):
         cdf[i] = cdf[i-1] + pr_rk[i]
-
-    # Passo 4: Calcular o mapeamento de transformação (sk)
-    # sk = (L - 1) * CDF(rk)
     sk = [round((L - 1) * c) for c in cdf]
-
     return sk
-
 
 def aplicar_mapeamento(imagem_np, mapa_sk):
     """Aplica um mapeamento de intensidade a uma imagem."""
-    # Cria uma cópia da imagem para não alterar a original
     imagem_equalizada_np = np.copy(imagem_np)
-    # Itera sobre cada valor de pixel possível (0-255)
+
     for rk in range(len(mapa_sk)):
-        # Encontra todos os pixels com o valor rk e os substitui pelo valor sk
         imagem_equalizada_np[imagem_np == rk] = mapa_sk[rk]
     return imagem_equalizada_np
 
 def calcular_histograma_simples(imagem_np, L=256):
-    """Calcula a frequência (histograma) de uma imagem."""
+    """Calcula a frequência (histograma) de uma imagem.
+        No geral, irá contar quantos pixels existem para cada nível de intensidade (0 a L-1).
+    """
     hist = [0] * L
     for pixel_value in np.nditer(imagem_np):
         hist[int(pixel_value)] += 1
     return hist
 
+
 if __name__ == "__main__":
-    # --- Configuração ---
-    # COLOQUE O CAMINHO PARA SUA IMAGEM AQUI
-    caminho_imagem = './Trabalho03/imagem_exemplo1.jpg'
+    # --- Configuração dos argumentos da linha de comando ---
+    
+    caminho_imagem = "./trabalho03/imagem_exemplo6.png"  # Caminho padrão da imagem
+    num_passes = 2
     L_intensidades = 256
 
     try:
-        # --- Carregamento e Preparação da Imagem ---
+        # --- Listas para armazenar os resultados de cada passo ---
+        lista_imagens = []
+        lista_histogramas = []
+
+        # --- Carregamento e Armazenamento da Imagem Original (Passo 0) ---
         print(f"Carregando a imagem: {caminho_imagem}")
-        # Abre a imagem e a converte para tons de cinza ('L' mode)
         img_pil = Image.open(caminho_imagem).convert('L')
-        # Converte a imagem PIL para um array NumPy para processamento
-        imagem_original_np = np.array(img_pil)
+        imagem_atual = np.array(img_pil)
+        
+        lista_imagens.append(imagem_atual)
+        lista_histogramas.append(calcular_histograma_simples(imagem_atual, L_intensidades))
 
-        # --- Processamento ---
-        # 1. Chamar a função principal para obter o mapeamento
-        print("Calculando o mapeamento de equalização...")
-        mapeamento_sk = equalizar_histograma(imagem_original_np, L=L_intensidades)
+        # --- Laço FOR para aplicar a equalização N vezes ---
+        for i in range(num_passes):
+            print(f"Executando a {i+1}ª passagem da equalização...")
+            
+            # Pega a imagem do último passo para processar
+            imagem_anterior = lista_imagens[-1]
+            
+            # Calcula e aplica a equalização
+            mapeamento = equalizar_histograma(imagem_anterior, L=L_intensidades)
+            imagem_nova = aplicar_mapeamento(imagem_anterior, mapeamento)
+            
+            lista_imagens.append(imagem_nova)
+            lista_histogramas.append(calcular_histograma_simples(imagem_nova, L_intensidades))
 
-        # 2. Aplicar o mapeamento para criar a imagem equalizada
-        print("Aplicando o mapeamento para gerar a nova imagem...")
-        imagem_equalizada_np = aplicar_mapeamento(imagem_original_np, mapeamento_sk)
+        # --- Exibição Dinâmica dos Resultados ---
+        print("Exibindo os resultados para comparação...")
 
-        # 3. Calcular os histogramas para exibição
-        print("Calculando os histogramas...")
-        hist_original = calcular_histograma_simples(imagem_original_np, L=L_intensidades)
-        hist_equalizado = calcular_histograma_simples(imagem_equalizada_np, L=L_intensidades)
+        num_linhas_plot = num_passes + 1
+        fig, axes = plt.subplots(num_linhas_plot, 2, figsize=(14, 7 * num_linhas_plot))
+        fig.suptitle(f'Comparação da Equalização Aplicada {num_passes} Vezes', fontsize=16)
 
-        # --- Exibição dos Resultados ---
-        print("Exibindo os resultados...")
-        fig, axes = plt.subplots(2, 2, figsize=(14, 10))
+        if num_linhas_plot == 1:
+            axes = np.array([axes])
 
-        # Imagem Original
-        axes[0, 0].imshow(imagem_original_np, cmap='gray', vmin=0, vmax=255)
-        axes[0, 0].set_title("1. Imagem Original")
-        axes[0, 0].axis('off')
+        for i in range(num_linhas_plot):
+            imagem = lista_imagens[i]
+            histograma = lista_histogramas[i]
+            
+            # Define o título da linha
+            if i == 0:
+                titulo_passo = "Original"
+            else:
+                titulo_passo = f"Após {i}ª Equalização"
 
-        # Histograma Original
-        axes[0, 1].bar(range(L_intensidades), hist_original, color='gray')
-        axes[0, 1].set_title("2. Histograma Original")
-        axes[0, 1].set_xlabel("Intensidade (rk)")
-        axes[0, 1].set_ylabel("Frequência Pr(rk)")
-        axes[0, 1].set_xlim([0, L_intensidades-1])
+            # Plot da imagem
+            axes[i, 0].imshow(imagem, cmap='gray', vmin=0, vmax=255)
+            axes[i, 0].set_title(f"Imagem {titulo_passo}")
+            axes[i, 0].axis('off')
 
-        # Imagem Equalizada
-        axes[1, 0].imshow(imagem_equalizada_np, cmap='gray', vmin=0, vmax=255)
-        axes[1, 0].set_title("3. Imagem Equalizada")
-        axes[1, 0].axis('off')
+            # Plot do histograma
+            axes[i, 1].bar(range(L_intensidades), histograma, color='gray')
+            #axes[i, 1].set_title(f"Histograma {titulo_passo}")
+            axes[i, 1].set_xlim([0, L_intensidades-1])
+            axes[i, 1].set_xlabel("Intensidade")
+            axes[i, 1].set_ylabel("Frequência")
 
-        # Histograma Equalizado
-        axes[1, 1].bar(range(L_intensidades), hist_equalizado, color='gray')
-        axes[1, 1].set_title("4. Histograma Equalizado")
-        axes[1, 1].set_xlabel("Intensidade (sk)")
-        axes[1, 1].set_ylabel("Frequência (Ps(sk)")
-        axes[1, 1].set_xlim([0, L_intensidades-1])
-
-        plt.tight_layout(pad=3.0)
+        plt.tight_layout(rect=[0, 0, 1, 0.97])
         plt.show()
 
     except FileNotFoundError:
         print(f"ERRO: O arquivo '{caminho_imagem}' não foi encontrado.")
-        print("Por favor, verifique se o nome do arquivo está correto e no mesmo diretório do script.")
     except Exception as e:
         print(f"Ocorreu um erro inesperado: {e}")
