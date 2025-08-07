@@ -118,4 +118,4 @@ if __name__ == "__main__":
     # 6. Mostrar o mapeamento (para explicação)
     print("\nMapeamento de intensidades (original → equalizado):") # Exibe o mapeamento de intensidades
     for i, v in enumerate(mapeamento): # Percorre o mapeamento
-        print(f"{i} → {v}") # Exibe o valor original e o valor equalizado correspondente
+        print(f"{i} → {v}") # Exibe o valor original e o valor equalizado correspondente.
