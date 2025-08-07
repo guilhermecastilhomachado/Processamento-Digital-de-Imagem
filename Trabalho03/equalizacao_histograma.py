@@ -37,38 +37,40 @@ if __name__ == "__main__":
     imagem_equalizada = Image.fromarray(imagem_equalizada_array) # Converte o array de volta para uma imagem PIL
 
     # 4. Exibe imagem original e equalizada
-    plt.figure(figsize=(12, 6))
+    plt.figure(figsize=(12, 6)) # cria uma figura com tamanho 12x6 polegadas, com 2 linhas e 2 colunas
+    # No caso usamos 4 subplots, de 2 linhas e 2 colunas para exibir a imagem original, o histograma original,
+    # a imagem equalizada e o histograma equalizado
 
-    plt.subplot(2, 2, 1)
-    plt.imshow(imagem_array, cmap='gray')
+    plt.subplot(2, 2, 1) # esse primeiro subplot ocupa a posição 1 na grade 2x2 que e a imagem original
+    plt.imshow(imagem_array, cmap='gray') # exibe a imagem original em tons de cinza
     plt.title('Imagem Original')
     plt.axis('off')
 
-    plt.subplot(2, 2, 2)
-    plt.hist(imagem_array.flatten(), bins=L, range=(0, L-1), color='gray')
+    plt.subplot(2, 2, 2) # esse segundo subplot ocupa a posição 2 na grade 2x2 que e o histograma original
+    plt.hist(imagem_array.flatten(), bins=L, range=(0, L-1), color='gray') # exibe o histograma da imagem original
     plt.title('Histograma Original')
 
-    plt.subplot(2, 2, 3)
-    plt.imshow(imagem_equalizada_array, cmap='gray')
+    plt.subplot(2, 2, 3) # esse terceiro subplot ocupa a posição 3 na grade 2x2 que e a imagem equalizada
+    plt.imshow(imagem_equalizada_array, cmap='gray') # exibe a imagem equalizada em tons de cinza
     plt.title('Imagem Equalizada')
     plt.axis('off')
 
     plt.subplot(2, 2, 4)
-    plt.hist(imagem_equalizada_array.flatten(), bins=L, range=(0, L-1), color='gray')
-    plt.title('Histograma Equalizado')
+    plt.hist(imagem_equalizada_array.flatten(), bins=L, range=(0, L-1), color='gray') # exibe o histograma da imagem
+    plt.title('Histograma Equalizado') # equalizada
 
-    plt.tight_layout()
-    plt.show()
+    plt.tight_layout() # Ajusta o layout para evitar sobreposição de subplots
+    plt.show() # Exibe todos os subplots
 
     # 5. Salvar a imagem equalizada
     nome_arquivo = 'imagem_equalizada6.png'
-    if os.path.exists(nome_arquivo):
+    if os.path.exists(nome_arquivo): # Verifica se o arquivo já existe pela função os.path.exists
         print(f"A imagem '{nome_arquivo}' já existe. Nenhuma nova imagem foi salva.")
     else:
-        imagem_equalizada.save(nome_arquivo)
+        imagem_equalizada.save(nome_arquivo) # Salva a imagem equalizada no arquivo especificado
         print(f"A imagem equalizada foi salva como '{nome_arquivo}'.")
 
     # 6. Mostrar o mapeamento (para explicação)
-    print("\nMapeamento de intensidades (original → equalizado):")
-    for i, v in enumerate(mapeamento):
-        print(f"{i} → {v}")
+    print("\nMapeamento de intensidades (original → equalizado):") # Exibe o mapeamento de intensidades
+    for i, v in enumerate(mapeamento): # Percorre o mapeamento
+        print(f"{i} → {v}") # Exibe o valor original e o valor equalizado correspondente
