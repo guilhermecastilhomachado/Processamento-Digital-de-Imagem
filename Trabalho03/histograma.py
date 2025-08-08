@@ -4,27 +4,34 @@ import matplotlib.pyplot as plt
 
 def equalizar_histograma(imagem_np, L=256):
     """Calcula o mapeamento de equalização de histograma para uma imagem."""
-    if imagem_np.ndim != 2:
+    if imagem_np.ndim != 2: # Verifica se a imagem é 2D (tons de cinza), o 2 significa que é uma matriz 2D
         raise ValueError("A imagem de entrada deve estar em tons de cinza (array 2D).")
-    nk = [0] * L
-    for pixel_value in np.nditer(imagem_np):
-        nk[int(pixel_value)] += 1
-    total_pixels = imagem_np.size
-    pr_rk = [freq / total_pixels for freq in nk]
-    cdf = [0.0] * L
-    cdf[0] = pr_rk[0]
-    for i in range(1, L):
-        cdf[i] = cdf[i-1] + pr_rk[i]
-    sk = [round((L - 1) * c) for c in cdf]
-    return sk
+    nk = [0] * L # Inicializa a lista de frequências com zeros, onde L é o número de níveis de intensidade
+    for pixel_value in np.nditer(imagem_np): # Itera sobre cada pixel da imagem usando nditer
+        nk[int(pixel_value)] += 1 # Incrementa a frequência do valor do pixel correspondente
+    total_pixels = imagem_np.size # Obtém o número total de pixels na imagem
+    pr_rk = [freq / total_pixels for freq in nk] # Calcula a probabilidade de cada nível de intensidade
+    cdf = [0.0] * L # Inicializa a lista da função de distribuição acumulada (CDF) com zeros
+    cdf[0] = pr_rk[0] # A CDF do primeiro nível é igual à sua probabilidade
+    for i in range(1, L): # Calcula a CDF acumulando as probabilidades
+        cdf[i] = cdf[i-1] + pr_rk[i] # A CDF do nível i é a soma da CDF do nível i-1 e a probabilidade do nível i
+    sk = [round((L - 1) * c) for c in cdf] # Normaliza a CDF para o intervalo [0, L-1] e arredonda para o inteiro mais próximo
+    return sk # Retorna o mapeamento de intensidades sk, que é uma lista onde cada índice representa o nível de intensidade original
+
+""" Em suma, essa função de equalizar_histograma recebe uma imagem em tons de cinza (array 2D) e calcula o 
+mapeamento de intensidades"""
+
 
 def aplicar_mapeamento(imagem_np, mapa_sk):
     """Aplica um mapeamento de intensidade a uma imagem."""
-    imagem_equalizada_np = np.copy(imagem_np)
+    imagem_equalizada_np = np.copy(imagem_np) # Cria uma cópia da imagem original para evitar modificações diretas
 
-    for rk in range(len(mapa_sk)):
-        imagem_equalizada_np[imagem_np == rk] = mapa_sk[rk]
-    return imagem_equalizada_np
+    for rk in range(len(mapa_sk)): # Itera sobre cada nível de intensidade original
+        imagem_equalizada_np[imagem_np == rk] = mapa_sk[rk] # Substitui os valores da imagem original pelo mapeamento correspondente
+    return imagem_equalizada_np # Retorna a imagem com o mapeamento aplicado, que agora está equalizada
+
+""" Em resumo, essa função de aplicar_mapeamento recebe uma imagem em tons de cinza (array 2D) e um mapeamento"""
+
 
 def calcular_histograma_simples(imagem_np, L=256):
     """Calcula a frequência (histograma) de uma imagem.
@@ -35,12 +42,14 @@ def calcular_histograma_simples(imagem_np, L=256):
         hist[int(pixel_value)] += 1
     return hist
 
+""" Em resumo, essa função de calcular_histograma_simples recebe uma imagem em tons de cinza (array 2D) e calcula o histograma,"""
+
 
 if __name__ == "__main__":
     # --- Configuração dos argumentos da linha de comando ---
     
-    caminho_imagem = "./trabalho03/imagem_exemplo6.png"  # Caminho padrão da imagem
-    num_passes = 2
+    caminho_imagem = "imagem_exemplo6.png"  # Caminho padrão da imagem
+    num_passes = 2 # Número de vezes que a equalização será aplicada
     L_intensidades = 256
 
     try:
