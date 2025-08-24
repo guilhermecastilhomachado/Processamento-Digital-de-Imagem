@@ -18,7 +18,7 @@ plt.show()
 # 2. Binarizar a imagem com threshold 67
 # ---------------------------------------------------
 # Regra: valores <= 67 → 1 (branco - objeto), valores > 67 → 0 (preto - fundo)
-threshold = 67
+threshold = 167
 imagem_binaria = np.where(imagem_array <= threshold, 1, 0)
 
 # 3. Função auxiliar para rotulagem usando busca em largura (BFS)
