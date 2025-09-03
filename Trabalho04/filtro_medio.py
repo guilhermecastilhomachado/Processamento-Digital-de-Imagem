@@ -101,6 +101,7 @@ def criar_filtro_media(tamanho):
     print(f"   • Cada coeficiente: {1 / num_elementos:.6f}")
     print(f"   • Soma total: {np.sum(filtro):.1f}")
     print(f"   • Efeito esperado: Suavização com borramento")
+    print(filtro) # Mostra o filtro criado diretamente
 
     return filtro
 
