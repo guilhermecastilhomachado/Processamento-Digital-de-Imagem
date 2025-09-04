@@ -103,6 +103,7 @@ def criar_filtro_gaussiano(tamanho, sigma):
 
     # Calcula o centro do filtro
     centro = tamanho // 2
+    # // divide e arredonda para baixo para garantir um índice inteiro
 
     # Inicializa matriz do filtro
     filtro = np.zeros((tamanho, tamanho), dtype=np.float64)
@@ -118,8 +119,8 @@ def criar_filtro_gaussiano(tamanho, sigma):
             filtro[i, j] = funcao_gaussiana_2d(x, y, sigma)
 
     # Normaliza o filtro (soma = 1) para preservar brilho
-    soma_filtro = np.sum(filtro)
-    filtro_normalizado = filtro / soma_filtro
+    soma_filtro = np.sum(filtro) # Soma de todos os valores do filtro
+    filtro_normalizado = filtro / soma_filtro # Normaliza dividindo cada valor pela soma total
 
     # Informações sobre o filtro criado
     print(f"   • Valor central: {filtro_normalizado[centro, centro]:.6f}")
