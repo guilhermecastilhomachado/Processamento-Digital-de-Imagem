@@ -5,3 +5,7 @@ venv/
 # IDEs
 .idea/
 .vscode/
+
+# Materiais que não devem ir para o repositório remoto
+Listas de Exercicios/
+Slides das Aulas/
