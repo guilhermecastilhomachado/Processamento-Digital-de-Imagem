@@ -1,5 +1,15 @@
 # Aula 1 — Introdução ao Processamento Digital de Imagens (PDI)
 
+Índice
+- [Objetivos](#objetivos)
+- [Aplicações típicas](#aplicações-típicas)
+- [Conceitos-chave](#conceitos-chave)
+- [Pipeline típico de PDI](#pipeline-típico-de-pdi)
+- [Exemplo rápido (Python)](#exemplo-rápido-python)
+- [Dicas](#dicas)
+- [Exercício rápido](#exercício-rápido)
+- [Referências](#referências)
+
 Objetivos
 - Entender o que é PDI, onde é aplicado e o pipeline básico.
 - Conhecer os pilares: amostragem (resolução espacial), quantização (profundidade de bits) e representação.
@@ -54,4 +64,3 @@ Exercício rápido
 
 Referências
 - Gonzalez & Woods, Digital Image Processing.
-

@@ -1,5 +1,11 @@
 # Aula 6 — Filtragem Espacial: Realce (Derivadas, Laplaciano, Unsharp)
 
+Índice
+- [Objetivos](#objetivos)
+- [Conceitos](#conceitos)
+- [Exemplo: magnitude do Sobel](#exemplo-magnitude-do-sobel)
+- [Cuidados](#cuidados)
+
 Objetivos
 - Realçar detalhes e bordas usando operadores de primeira e segunda ordem.
 
@@ -33,4 +39,3 @@ Image.fromarray(sobel(a)).save('sobel_mag.png')
 
 Cuidados
 - Aplique suavização leve antes de derivadas para reduzir ruído.
-

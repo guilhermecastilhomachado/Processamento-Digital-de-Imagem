@@ -1,5 +1,11 @@
 # Aula 4 — Histogramas e Processamento Baseado em Histograma
 
+Índice
+- [Objetivos](#objetivos)
+- [Conceitos](#conceitos)
+- [Exemplo: equalização manual](#exemplo-equalização-manual)
+- [Cuidados](#cuidados)
+
 Objetivos
 - Compreender histogramas, CDF e técnicas de realce como equalização.
 
@@ -30,4 +36,3 @@ Image.fromarray(eq).save('eq.png')
 Cuidados
 - Pode superrealçar ruído em faixas estreitas.
 - Em imagens coloridas, equalize por canal com cautela (melhor: equalização no espaço HSV/V).
-

@@ -1,5 +1,13 @@
 # Aula 3 — Conectividade, Componentes e Rotulagem
 
+Índice
+- [Objetivos](#objetivos)
+- [Conceitos](#conceitos)
+- [Algoritmos de rotulagem](#algoritmos-de-rotulagem)
+- [Exemplo (BFS 4-conectado)](#exemplo-bfs-4-conectado)
+- [Aplicações](#aplicações)
+- [Dicas](#dicas)
+
 Objetivos
 - Definir conectividade 4 e 8, componentes conexos e como rotular objetos binários.
 
@@ -44,4 +52,3 @@ Aplicações
 Dicas
 - Escolha a conectividade adequada ao problema (evitar “pontes” por diagonal indesejadas).
 - Pré-filtragem pode reduzir ruído (remoção de pequenos componentes).
-

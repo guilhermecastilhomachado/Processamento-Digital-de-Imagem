@@ -1,5 +1,12 @@
 # Aula 11 — Representação e Descrição (Parte 2): Textura e Formas Avançadas
 
+Índice
+- [Objetivos](#objetivos)
+- [Textura](#textura)
+- [Formas](#formas)
+- [Exemplo: métricas GLCM (usando skimage)](#exemplo-métricas-glcm-usando-skimage)
+- [Dicas](#dicas)
+
 Objetivos
 - Explorar descritores avançados: textura, formas e contornos robustos.
 

@@ -1,5 +1,11 @@
 # Aula 8 — Segmentação de Imagens
 
+Índice
+- [Objetivos](#objetivos)
+- [Abordagens](#abordagens)
+- [Exemplo: thresholding de Otsu (implementação simples)](#exemplo-thresholding-de-otsu-implementação-simples)
+- [Dicas](#dicas)
+
 Objetivos
 - Separar objetos de interesse do fundo por thresholding, bordas e regiões.
 
@@ -41,4 +47,3 @@ Image.fromarray(bin_img).save('clc3_otsu.png')
 Dicas
 - Pré-processar com suavização reduz falsos contornos.
 - Pós-processar com morfologia para limpar a segmentação.
-

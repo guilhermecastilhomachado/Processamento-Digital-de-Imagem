@@ -1,5 +1,11 @@
 # Aula 5 — Filtragem Espacial: Suavização (Média, Mediana, Gaussiano)
 
+Índice
+- [Objetivos](#objetivos)
+- [Filtros comuns](#filtros-comuns)
+- [Exemplo: convolução com média 3×3](#exemplo-convolução-com-média-33)
+- [Dicas](#dicas)
+
 Objetivos
 - Entender filtros passa-baixa e seus efeitos em ruído e detalhes.
 
@@ -32,4 +38,3 @@ Image.fromarray(mean3(a)).save('ben2_mean3.png')
 Dicas
 - Para Gaussiano, tamanho ≈ 6σ+1 (ímpar) captura 99% da distribuição.
 - Mediana é não-linear; não use convolução linear para implementá-la.
-

@@ -1,5 +1,11 @@
 # Aula 7 — Morfologia Matemática
 
+Índice
+- [Objetivos](#objetivos)
+- [Conceitos](#conceitos)
+- [Exemplo (binário, EE 3×3 quadrado)](#exemplo-binário-ee-33-quadrado)
+- [Aplicações](#aplicações)
+
 Objetivos
 - Operações com elementos estruturantes em imagens binárias e em tons de cinza.
 
@@ -33,4 +39,3 @@ def erodir(bin_img):
 
 Aplicações
 - Limpeza de ruídos, fechamento de buracos, extração de esqueletos, medidas de forma.
-

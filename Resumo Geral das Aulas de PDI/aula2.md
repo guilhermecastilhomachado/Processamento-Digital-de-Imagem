@@ -1,5 +1,13 @@
 # Aula 2 — Representação de Imagem Digital
 
+Índice
+- [Objetivos](#objetivos)
+- [Amostragem (resolução espacial)](#amostragem-resolução-espacial)
+- [Quantização (resolução de intensidade)](#quantização-resolução-de-intensidade)
+- [Formatos de arquivo](#formatos-de-arquivo)
+- [Exemplos de reamostragem e quantização](#exemplos-de-reamostragem-e-quantização)
+- [Dicas](#dicas)
+
 Objetivos
 - Entender como imagens são representadas no computador: amostragem, quantização e formatos.
 
@@ -50,4 +58,3 @@ Image.fromarray(q.astype(np.uint8)).save('quantizada_4bits.png')
 Dicas
 - Para Gaussiano, use tamanho de máscara ímpar e compatível com σ (≈ 6σ).
 - Sempre normalizar kernels (soma = 1) para preservar brilho.
-

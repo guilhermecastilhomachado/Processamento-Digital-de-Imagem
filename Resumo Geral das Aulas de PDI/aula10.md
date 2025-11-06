@@ -1,5 +1,12 @@
 # Aula 10 — Representação e Descrição de Regiões
 
+Índice
+- [Objetivos](#objetivos)
+- [Representações](#representações)
+- [Descritores clássicos](#descritores-clássicos)
+- [Exemplo: medidas simples de uma região](#exemplo-medidas-simples-de-uma-região)
+- [Dicas](#dicas)
+
 Objetivos
 - Representar objetos segmentados e extrair descritores para reconhecimento.
 
