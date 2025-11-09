@@ -108,6 +108,5 @@ Os resumos estão em [Resumo Geral das Aulas de PDI/](Resumo%20Geral%20das%20Aul
   - scikit-image (Aula 11): `pip install scikit-image`
 
 > Observações:
-> - As pastas `Listas de Exercicios/` e `Slides das Aulas/` estão no `.gitignore`.
 > - Execute os scripts dentro da pasta de cada trabalho para evitar problemas com caminhos relativos.
 
